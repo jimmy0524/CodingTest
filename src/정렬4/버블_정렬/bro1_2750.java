@@ -1,4 +1,4 @@
-package 자료구조3.버블_정렬;
+package 정렬4.버블_정렬;
 
 import java.util.Scanner;
 
