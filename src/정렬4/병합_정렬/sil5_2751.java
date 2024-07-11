@@ -52,7 +52,7 @@ public class sil5_2751 {
             k++;
             index1++;
         }
-        //오른쪽 반에 남아있는 요소를 B에 넣기
+        //오른쪽 반에 남아있는 요소를 A에 넣기
         while (index2 <= b) {
             A[k] = tmp[index2];
             k++;
