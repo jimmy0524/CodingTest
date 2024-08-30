@@ -1,12 +1,7 @@
 package 그래프8.그래프의_표현;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class sil1_1325 {
     static int N, M;
@@ -16,6 +11,7 @@ public class sil1_1325 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         N = Integer.parseInt(st.nextToken()); //컴퓨터 개수
         M = Integer.parseInt(st.nextToken()); //신뢰 관계 개수
         A = new ArrayList[N + 1];
@@ -42,9 +38,10 @@ public class sil1_1325 {
         //최댓값에 해당하는 answer (신뢰를 가장 많이 받는 노드) 출력하기
         for (int i = 1; i <= N; i++) {
             if (answer[i] == max) {
-                System.out.print(i + " ");
+                bw.write(i + " ");
             }
         }
+        bw.flush();
     }
     public static void BFS(int x) {
         Queue<Integer> q = new LinkedList<>();
