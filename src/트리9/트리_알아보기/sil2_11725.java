@@ -1,4 +1,4 @@
-package 트리9;
+package 트리9.트리_알아보기;
 
 import java.io.BufferedReader;
 import java.io.IOException;
