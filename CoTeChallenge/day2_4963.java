@@ -46,6 +46,8 @@ public class day2_4963 {
 
     public static void BFS(int i, int j) {
         Queue<int[]> q = new LinkedList<>();
+        int[] dx = {1, -1, 0, 0, -1, 1, 1, -1};
+        int[] dy = {0, 0, 1, -1, -1, 1, -1, 1};
         q.add(new int[]{i, j});
         visited[i][j] = true;
 
@@ -54,52 +56,14 @@ public class day2_4963 {
             int A = now[0];
             int B = now[1];
             if (i <= H && j <= W && A >= 1 && B >= 1) {
-                if (!visited[A + 1][B]) {
-                    if (arr[A + 1][B] == 1) {
-                        q.add(new int[]{A + 1, B});
-                        visited[A + 1][B] = true;
-                    }
-                }
-                if (!visited[A - 1][B]) {
-                    if (arr[A - 1][B] == 1) {
-                        q.add(new int[]{A - 1, B});
-                        visited[A - 1][B] = true;
-                    }
-                }
-                if (!visited[A][B + 1]) {
-                    if (arr[A][B + 1] == 1) {
-                        q.add(new int[]{A, B + 1});
-                        visited[A][B + 1] = true;
-                    }
-                }
-                if (!visited[A][B - 1]) {
-                    if (arr[A][B - 1] == 1) {
-                        q.add(new int[]{A, B - 1});
-                        visited[A][B - 1] = true;
-                    }
-                }
-                if (!visited[A - 1][B - 1]) {
-                    if (arr[A - 1][B - 1] == 1) {
-                        q.add(new int[]{A - 1, B - 1});
-                        visited[A - 1][B - 1] = true;
-                    }
-                }
-                if (!visited[A + 1][B + 1]) {
-                    if (arr[A + 1][B + 1] == 1) {
-                        q.add(new int[]{A + 1, B + 1});
-                        visited[A + 1][B + 1] = true;
-                    }
-                }
-                if (!visited[A + 1][B - 1]) {
-                    if (arr[A + 1][B - 1] == 1) {
-                        q.add(new int[]{A + 1, B - 1});
-                        visited[A + 1][B - 1] = true;
-                    }
-                }
-                if (!visited[A - 1][B + 1]) {
-                    if (arr[A - 1][B + 1] == 1) {
-                        q.add(new int[]{A - 1, B + 1});
-                        visited[A - 1][B + 1] = true;
+                for (int k = 0; k <= 7; k++) {
+                    int x = A + dx[k];
+                    int y = B + dy[k];
+                    if(!visited[x][y]) {
+                        if(arr[x][y] == 1) {
+                            visited[x][y] = true;
+                            q.add(new int[]{x, y});
+                        }
                     }
                 }
             }
