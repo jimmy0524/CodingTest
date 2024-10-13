@@ -18,16 +18,9 @@ public class day7_1149 {
         }
 
         for (int i = 1; i <= N; i++) {
-            for (int j = 1; j <= 3; j++) {
-                if (j == 1) {
-                    D[i][j] = Math.min(D[i - 1][j + 1], D[i - 1][j + 2]);
-                } else if (j == 2) {
-                    D[i][j] = Math.min(D[i - 1][j - 1], D[i - 1][j + 1]);
-                } else {
-                    D[i][j] = Math.min(D[i - 1][j - 1], D[i - 1][j - 2]);
-                }
-                D[i][j] += arr[i][j];
-            }
+            D[i][1] = Math.min(D[i - 1][2], D[i - 1][3]) + arr[i][1];
+            D[i][2] = Math.min(D[i - 1][1], D[i - 1][3]) + arr[i][2];
+            D[i][3] = Math.min(D[i - 1][1], D[i - 1][2]) + arr[i][3];
         }
 
         int temp;
