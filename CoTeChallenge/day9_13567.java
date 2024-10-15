@@ -31,7 +31,7 @@ public class day9_13567 {
                 if (num == 0) {
                     dir = (dir + 1) % 4;
                 } else {
-                    dir = (4 + (dir - 1)) % 4;
+                    dir = (dir + 3) % 4;
                 }
             }
         }
