@@ -18,7 +18,7 @@ public class day13_17266 {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        int left = 0;
+        int left = 1;
         int right = N;
         int result = N;
 
