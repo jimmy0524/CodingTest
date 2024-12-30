@@ -17,10 +17,13 @@ class Main {
         int min = Math.abs(arr[start] + arr[end]);
 
         while(true) {
-            if (arr[start] + arr[end] < 0) {
+            int sum = arr[start] + arr[end];
+            if (sum < 0) {
                 start ++;
-            } else {
+            } else if(sum > 0) {
                 end --;
+            } else {
+                break;
             }
             if (start >= end) {
                 break;
