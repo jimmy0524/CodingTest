@@ -44,43 +44,6 @@ class Main {
         }
         result = Math.min(sum, result);
 
-        for (int i = 0; i < length; i++) {
-            if (arr[i] == 0) {
-                arr[i] = 1;
-            } else {
-                arr[i] = 0;
-            }
-        }
-
-        sum = 0;
-        meet = false;
-        for (int i = 0; i < length; i++) {
-            if (arr[i] == 0) {
-                if (!meet) {
-                    sum++;
-                    meet = true;
-                }
-            } else {
-                meet = false;
-            }
-        }
-        result = Math.min(sum, result);
-
-        meet = false;
-        sum = 0;
-        for (int i = 0; i < length; i++) {
-            if (arr[i] == 1) {
-                if (!meet) {
-                    sum++;
-                    meet = true;
-                }
-            } else {
-                meet = false;
-            }
-        }
-        result = Math.min(sum, result);
-
         System.out.println(result);
-
     }
 }
