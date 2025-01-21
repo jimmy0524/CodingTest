@@ -1,49 +1,12 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
-        int length = s.length();
-        int[] arr = new int[length];
-        for (int i = 0; i < length; i++) {
-            arr[i] = s.charAt(i) - '0';
-        }
-
-        for (int i = 0; i < length; i++) {
-            if (!(s.contains("0") && s.contains("1"))) {
-                System.out.println(0);
-                return;
-            }
-        }
-
-        int result = 0;
-        boolean meet = false;
-        for (int i = 0; i < length; i++) {
-            if (arr[i] == 0) {
-                if (!meet) {
-                    result++;
-                    meet = true;
-                }
-            } else {
-                meet = false;
-            }
-        }
-
-        meet = false;
-        int sum = 0;
-        for (int i = 0; i < length; i++) {
-            if (arr[i] == 1) {
-                if (!meet) {
-                    sum++;
-                    meet = true;
-                }
-            } else {
-                meet = false;
-            }
-        }
-        result = Math.min(sum, result);
-
-        System.out.println(result);
+        StringTokenizer st1 = new StringTokenizer(s, "0");
+        StringTokenizer st0 = new StringTokenizer(s, "1");
+        System.out.println(Math.min(st1.countTokens(), st0.countTokens()));
     }
 }
