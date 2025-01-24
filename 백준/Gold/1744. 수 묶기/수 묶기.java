@@ -1,47 +1,51 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.PriorityQueue;
 
 class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         int result = 0;
-        int countMinus = 0;
-        int countPlus = 0;
-        ArrayList<Integer> arr = new ArrayList<>();
+        PriorityQueue<Integer> negatives = new PriorityQueue<>();
+        PriorityQueue<Integer> positives = new PriorityQueue<>(Collections.reverseOrder());
+        boolean hasZero = false;
+
         for (int i = 0; i < N; i++) {
             int num = Integer.parseInt(br.readLine());
-            arr.add(num);
-            if (num <= 0) {
-                countMinus++;
-            } if(num > 1) {
-                countPlus++;
-            }
-        }
-        Collections.sort(arr);
-        // 음수가 2개 이상이면 1개 될 때까지 곱하기 + 0 (가장 작은 음수랑 곱하기)
-        while (countMinus >= 2) {
-            if (arr.size() == 2 && arr.contains(0)) {
-                arr.remove((Integer) 0);
-                arr.remove(0);
+            if (num > 1) {
+                positives.add(num);
+            } else if (num == 1) {
+                result += 1;
+            } else if (num == 0) {
+                hasZero = true;
             } else {
-                result += arr.get(0) * arr.get(1);
-                arr.remove(0);
-                arr.remove(0);
+                negatives.add(num);
             }
-            countMinus -= 2;
         }
 
-        while (countPlus >= 2) {
-            result += arr.get(arr.size() - 1) * arr.get(arr.size() - 2);
-            arr.remove(arr.size() - 1);
-            arr.remove(arr.size() - 1);
-            countPlus -= 2;
+        while (negatives.size() >= 2) {
+            int num1 = negatives.poll();
+            int num2 = negatives.poll();
+            result += num1 * num2;
         }
 
-        for (int i : arr) {
-            result += i;
+        while (!negatives.isEmpty()) {
+            if (hasZero) {
+                negatives.poll();
+            } else {
+                result += negatives.poll();
+            }
+        }
+
+        while (positives.size() >= 2) {
+            int num1 = positives.poll();
+            int num2 = positives.poll();
+            result += num1 * num2;
+        }
+
+        while (!positives.isEmpty()) {
+            result += positives.poll();
         }
 
         System.out.println(result);
