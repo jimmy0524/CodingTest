@@ -2,14 +2,14 @@ import java.util.*;
 
 class Solution {
     public long solution(long n) {
-        String s = String.valueOf(n);
-        String[] split = s.split("");
+        String[] split = String.valueOf(n).split("");
         Arrays.sort(split, Collections.reverseOrder());
-        String answerString = "";
+        StringBuilder sb = new StringBuilder();
         for (String temp : split) {
-            answerString += temp;
+            sb.append(temp);
         }
-        long answer = Long.parseLong(answerString);
+        long answer = Long.parseLong(sb.toString());
+
         return answer;
     }
 }
