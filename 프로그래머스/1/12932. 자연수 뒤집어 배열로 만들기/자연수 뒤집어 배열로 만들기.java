@@ -3,11 +3,11 @@ import java.util.*;
 class Solution {
     public int[] solution(long n) {
         String s = Long.toString(n);
-        ArrayList<Integer> arr = new ArrayList<>();
-        for (int i = s.length() - 1; i >= 0; i--) {
-            arr.add(s.charAt(i) - '0');
+        int[] answer = new int[s.length()];
+        for (int j = 0, i = s.length() - 1; j < s.length(); j++, i--) {
+            answer[j] = s.charAt(i) - '0';
         }
         
-        return arr.stream().mapToInt(i -> i).toArray();
+        return answer;
     }
 }
