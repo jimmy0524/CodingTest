@@ -4,37 +4,15 @@ class Solution {
         int index1 = 0;
         int index2 = 0;
         for (int i = 0; i < goal.length; i++) {
-            boolean check = false;
-            if (cards1[index1].equals(goal[i])) {
-                check = true;
-                if (i == goal.length - 1 && index1 == cards1.length - 1) {
-                    // 문장의 마지막 문자면 
-                    break;
-                }
-                
-                if (index1 != cards1.length - 1) {
-                    // 카드의 마지막 문자가 아닐떄
-                   index1 ++;
-                   continue;
-                } 
-            }
-            
-            if (cards2[index2].equals(goal[i])) {
-                check = true;
-                if (i == goal.length - 1 && index2 == cards2.length - 1) {
-                    // 문장의 마지막 문자면 
-                    break;
-                }
-                
-                if (index2 != cards2.length - 1) {
-                   index2 ++;
-                   continue;
-                }
-            }
-            if (!check) {
+            if (index1 < cards1.length && cards1[index1].equals(goal[i])) {
+                index1 ++;
+            } else if (index2 < cards2.length && cards2[index2].equals(goal[i])) {
+                index2 ++;
+            } else {
                 return "No";
             }
         }
+        
         return answer;
     }
 }
