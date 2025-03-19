@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public int solution(String s) {
         int answer = 0;
-        
+
         for (int i = 0; i < s.length() - 1; i++) {
             Stack<Character> stack = new Stack<>();
             boolean check = true;
@@ -23,7 +23,7 @@ class Solution {
                         break;
                     }
                 }
-                
+
                 if (s.charAt(j) == ']') {
                     if (stack.isEmpty()) {
                         check = false;
@@ -36,7 +36,7 @@ class Solution {
                         break;
                     }
                 }
-                
+
                 if (s.charAt(j) == '}') {
                     if (stack.isEmpty()) {
                         check = false;
@@ -50,11 +50,11 @@ class Solution {
                     }
                 }
             }
-            
+
             if (check && stack.isEmpty()) {
                 answer ++;
             }
-            
+
             s = s.substring(1) + s.charAt(0);
         }
         return answer;
