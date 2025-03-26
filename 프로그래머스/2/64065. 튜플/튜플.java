@@ -2,21 +2,16 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String s) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        
+        LinkedHashSet<Integer> set = new LinkedHashSet<>();
         s = s.substring(2, s.length() - 2);
         String[] arr = s.split("},\\{");
+        Arrays.sort(arr, (a,b) -> {return a.length() - b.length();});
         for (String str : arr) {
             for (String str2 : str.split(",")) {
-                int num = Integer.parseInt(str2);
-                map.put(num, map.getOrDefault(num, 0) + 1);
+                set.add(Integer.parseInt(str2));
             }
         }
-
-        return map.entrySet()
-            .stream()
-            .sorted(Map.Entry.<Integer, Integer> comparingByValue().reversed())
-            .mapToInt(entry -> entry.getKey())
-            .toArray();
+        
+        return set.stream().mapToInt(i -> i).toArray();
     }
 }
