@@ -1,20 +1,23 @@
+//1차시도 : 2중 for문
+//2차시도 : stack
+import java.util.*;
+
 class Solution {
     public int[] solution(int[] prices) {
+        Stack<Integer> stack = new Stack<>();
         int[] answer = new int[prices.length];
-        for (int i = 0; i < prices.length - 1; i++) {
-            boolean check = false;
-            for (int j = i + 1; j < prices.length; j++) {
-                if (prices[i] > prices[j]) {
-                    answer[i] = j - i;
-                    check = true;
-                    break;
-                }
+        for (int i = 0; i < prices.length; i++) {
+            while(!stack.isEmpty() && prices[i] < prices[stack.peek()]) {
+                int index = stack.pop();
+                answer[index] = i - index;
             }
-            if (!check) {
-                answer[i] = prices.length - 1 - i;
-            }
+            stack.push(i);
         }
-        answer[prices.length - 1] = 0;
+        
+        while(!stack.isEmpty()) {
+            int index = stack.pop();
+            answer[index] = prices.length - 1 - index;
+        }
         
         return answer;
     }
