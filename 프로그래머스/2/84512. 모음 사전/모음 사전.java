@@ -7,7 +7,6 @@ class Solution {
     public int solution(String word) {
         int answer = 0;
         dfs("", 0);
-        Collections.sort(arr);
         
         if (arr.get(0).equals("")) {
             arr.remove(0);
