@@ -14,13 +14,9 @@ class Solution {
             } else { //D로 시작하는 것
                 if (!asc.isEmpty()) {
                     if (arr[1].equals("-1")) { //최솟값 삭제
-                        asc.poll();
-                        desc.clear();
-                        desc.addAll(asc);
+                        desc.remove(asc.poll());
                     } else { //1 최댓값 삭제
-                        desc.poll();
-                        asc.clear();
-                        asc.addAll(desc);
+                        asc.remove(desc.poll());
                     }
                 } 
              }
