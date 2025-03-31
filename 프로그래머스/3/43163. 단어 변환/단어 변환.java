@@ -22,12 +22,10 @@ class Solution {
             return;
         }
         
-        String[] beginArr = begin.split("");
-        for (int i = 0; i < words.length; i++) { //6
+        for (int i = 0; i < words.length; i++) { 
             int unSameCount = 0;
-            String[] wordsSplit = words[i].split(""); //h, o , t
-            for (int j = 0; j < wordsSplit.length; j++) { //3
-                if (!beginArr[j].equals(wordsSplit[j])) {
+            for (int j = 0; j < begin.length(); j++) { 
+                if (begin.charAt(j) != words[i].charAt(j)) {
                         unSameCount++;
                     }
             }
