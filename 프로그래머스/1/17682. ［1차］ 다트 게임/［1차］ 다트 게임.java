@@ -4,7 +4,7 @@ class Solution {
     public int solution(String dartResult) {
         ArrayList<Integer> arr = new ArrayList<>();
         for (int i = 0; i < dartResult.length(); i++) {
-            if (dartResult.charAt(i) >= '0' && dartResult.charAt(i) <= '9') { //숫자면
+            if (Character.isDigit(dartResult.charAt(i))) { //숫자면
                 if (dartResult.charAt(i) == '1' && dartResult.charAt(i + 1) == '0') {
                     arr.add(10);
                     i++;
