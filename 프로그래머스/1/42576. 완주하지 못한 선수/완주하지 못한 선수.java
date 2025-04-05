@@ -2,23 +2,32 @@ import java.util.*;
 
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        HashMap<String, Integer> hashMap = new HashMap<>();
-        
-        for (String p : participant) {
-            hashMap.put(p, hashMap.getOrDefault(p, 0) + 1);
-        }
-        
-        for (String c : completion) {
-            hashMap.put(c, hashMap.get(c) - 1);
-        }
-        
+        Queue<String> participantQueue = new LinkedList<>();
+        Queue<String> completionQueue = new LinkedList<>();
+        Arrays.sort(participant);
+        Arrays.sort(completion);
         String answer = "";
-        for (String key : hashMap.keySet()) {
-            if (hashMap.get(key) != 0) {
-                answer += key;
+        
+        for (String s : participant) {
+            participantQueue.add(s);
+        }
+        
+        for (String s : completion) {
+            completionQueue.add(s);
+        }
+        
+        while(!completionQueue.isEmpty()) {
+            String c = completionQueue.poll();
+            String p = participantQueue.poll();
+            if (!c.equals(p)) {
+                return p;
             }
         }
-    
+        
+        if (participantQueue.size() == 1) {
+            answer = participantQueue.poll();
+        }
+        
         return answer;
     }
 }
