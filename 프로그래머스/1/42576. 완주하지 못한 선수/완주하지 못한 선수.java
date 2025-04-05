@@ -2,32 +2,21 @@ import java.util.*;
 
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        Queue<String> participantQueue = new LinkedList<>();
-        Queue<String> completionQueue = new LinkedList<>();
-        Arrays.sort(participant);
-        Arrays.sort(completion);
-        String answer = "";
-        
-        for (String s : participant) {
-            participantQueue.add(s);
+        HashMap<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < participant.length; i++) {
+            map.put(participant[i], map.getOrDefault(participant[i], 0) + 1);
         }
         
-        for (String s : completion) {
-            completionQueue.add(s);
+        for (int i = 0; i < completion.length; i++) {
+            map.put(completion[i], map.getOrDefault(completion[i], 0) - 1);
         }
         
-        while(!completionQueue.isEmpty()) {
-            String c = completionQueue.poll();
-            String p = participantQueue.poll();
-            if (!c.equals(p)) {
-                return p;
+        for (String key : map.keySet()) {
+            if (map.get(key) != 0) {
+                return key;
             }
         }
-        
-        if (participantQueue.size() == 1) {
-            answer = participantQueue.poll();
-        }
-        
-        return answer;
+       
+        return "";
     }
 }
