@@ -19,18 +19,14 @@ class Solution {
         return answer;
     }
     public void dfs(int count, String str) {
-        if (count == arr.length) {
-            if (!str.isEmpty() && !str.startsWith("0")) {
-                set.add(Integer.valueOf(str));
-            }
-            return;
+        if (!str.isEmpty()) {
+            set.add(Integer.valueOf(str));
         }
         
         for (int i = 0; i < arr.length; i++) {
             if(!visited[i]) {
                 visited[i] = true;
                 dfs(count + 1, str + arr[i]);
-                dfs(count + 1, str); //선택 안함
                 visited[i] = false;
             }
         }
