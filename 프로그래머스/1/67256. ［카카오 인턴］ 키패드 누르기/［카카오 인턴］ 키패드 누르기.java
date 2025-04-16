@@ -7,14 +7,12 @@ class Solution {
             int[] temp = findKey(numbers[i]);
             if (numbers[i] == 1 || numbers[i] == 4 || numbers[i] == 7) {
                 sb.append("L");
-                left[0] = temp[0];
-                left[1] = temp[1];
+                left = temp.clone();
                 continue;
             }
             if (numbers[i] == 3 || numbers[i] == 6 || numbers[i] == 9) {
                 sb.append("R");
-                right[0] = temp[0];
-                right[1] = temp[1];
+                right = temp.clone();
                 continue;
             }
             
@@ -24,23 +22,19 @@ class Solution {
             if (rightDistance == leftDistance) {
                 if (hand.equals("right")) {
                     sb.append("R");
-                    right[0] = temp[0];
-                    right[1] = temp[1];
+                    right = temp.clone();
                     continue;
                 }
                 sb.append("L");
-                left[0] = temp[0];
-                left[1] = temp[1];
+                left = temp.clone();
                 continue;
             } else if (rightDistance < leftDistance) {
                 sb.append("R");
-                right[0] = temp[0];
-                right[1] = temp[1];
+                right = temp.clone();
                 continue;
             }
             sb.append("L");
-            left[0] = temp[0];
-            left[1] = temp[1];
+            left = temp.clone();
             continue;
         }
         return sb.toString();
