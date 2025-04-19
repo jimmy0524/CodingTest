@@ -15,11 +15,7 @@ class Solution {
                     if (!keySet.isEmpty() && map.get(keySet.get(0)) >= 2) {
                        result.add(keySet.get(0));
                         int tempCount = map.get(keySet.get(0));
-                        System.out.println("tempCount : " + tempCount);
                         for (int j = 1; j < keySet.size(); j++) {
-                            
-                                System.out.println("keySet.get(j) : " + keySet.get(j));
-                            System.out.println("map.get(keySet.get(j)" + map.get(keySet.get(j)));
                             if (map.get(keySet.get(j)) == tempCount) {
                                     result.add(keySet.get(j));
                                 }
@@ -37,7 +33,6 @@ class Solution {
         if (c == count) {
             String s = sb.toString();
             map.put(s, map.getOrDefault(s, 0) + 1);
-            System.out.println("s : " + s +  map.get(s));
             return;
         }
         
