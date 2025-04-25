@@ -11,7 +11,7 @@ class Solution {
         
         dfs("ICN", 0, new StringBuilder());
         
-        return answer.get(0).trim().split(" ");
+        return answer.get(0).split(" ");
     }
     public void dfs(String s, int depth, StringBuilder sb) {
         if (sb.length() < 1) {
@@ -29,7 +29,7 @@ class Solution {
                 int tempLength = sb.length();
                 sb.append(tickets[i][1] + " ");
                 dfs(tickets[i][1], depth + 1, sb);
-                sb.setLength(tempLength);   
+                sb.setLength(tempLength);  
                 visited[i] = false;
             }
         }
