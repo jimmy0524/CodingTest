@@ -10,11 +10,11 @@ class Solution {
         for (int i = 1; i <= length; i++) {
             StringBuilder sb = new StringBuilder();
             Queue<String> q = new LinkedList<>();
+            String remain = "";
             for (int j = 0; j <= s.length() - i; j += i) {
                 q.add(s.substring(j, j + i));
+                remain = s.substring(j + i, s.length());
             }
-            int remainNum = s.length() - (q.size() * i);
-            String remain = s.substring(s.length() - remainNum, s.length());
             while(!q.isEmpty()) {
                 int count = 1;
                 String temp = q.poll();
