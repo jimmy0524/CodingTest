@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class Main {
 	static int[] arr;
 	static int[] result;
+	static boolean found = false;
 	public static void main(String args[]) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		arr = new int[9];
@@ -20,9 +21,12 @@ public class Main {
 		}
 	}
 	private static void dfs(int index, int count, int sum, ArrayList<Integer> tempArr) {
+		if (found) return;
+		
 		if (count == 7) {
 			if (sum == 100) {
 				result = tempArr.stream().mapToInt(i -> i).toArray();
+				found = true;
 				return;
 			}
 		}
