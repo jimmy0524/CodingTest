@@ -18,10 +18,15 @@ public class Main {
             parent[i] = i;
 		}
 		arr.sort((a, b) -> a.value - b.value);
+		int count = 0;
 		for (int i = 0; i < arr.size(); i++) {
 			if (find(arr.get(i).to) != find(arr.get(i).from)) {
+				count++;
 				answer += arr.get(i).value;
 				union(arr.get(i).to, arr.get(i).from);
+				if (count == N - 1) {
+					break;
+				}
 			}
 		}
 		System.out.println(answer);
