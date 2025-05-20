@@ -1,73 +1,66 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-    static int[][] arr;
-    static boolean[][] visited;
-    static int[] dx = {1, -1, 0, 0};
-    static int[] dy = {0, 0, 1, -1};
-    static int N;
-    static int M;
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        arr = new int[N][M];
-        visited = new boolean[N][M];
-        for (int i = 0; i < N; i++) {
-            String s = br.readLine();
-            for (int j = 0; j < M; j++) {
-                arr[i][j] = s.charAt(j) - '0';
-            }
-        }
-        System.out.println(BFS(0, 0));
-    }
-
-    private static int BFS(int x, int y) {
-        Queue<Point> q = new LinkedList<>();
-        q.add(new Point(x, y));
-        visited[x][y] = true;
-
-        int count = 1;
-
-        while (!q.isEmpty()) {
-            int size = q.size();
-            for (int i = 0; i < size; i++) {
-                Point p = q.poll();
-                int nx = p.x;
-                int ny = p.y;
-                if (nx == N - 1 && ny == M - 1) {
-                    return count;
-                }
-                for (int j = 0; j < 4; j++) {
-                    int nextX = nx + dx[j];
-                    int nextY = ny + dy[j];
-                    if (nextX >= 0 && nextY >= 0 && nextX < N && nextY < M) {
-                        if (!visited[nextX][nextY] && arr[nextX][nextY] == 1) {
-                            q.add(new Point(nextX, nextY));
-                            visited[nextX][nextY] = true;
-                        }
-                    }
-                }
-            }
-            count++;
-        }
-        return -1;
-    }
-
-    public static class Point {
-        int x, y;
-
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
+	static boolean[][] visited;
+	static int[][] arr;
+	static int[] dx = {1, -1, 0, 0};
+	static int[] dy = {0, 0, 1, -1};
+	static int N;
+	static int M;
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken()); //정점 개수
+		M = Integer.parseInt(st.nextToken()); //간선 개수
+		arr = new int[N][M];
+		visited = new boolean[N][M];
+		for (int i = 0; i < N; i++) {
+			String s = br.readLine();
+			for (int j = 0; j < M; j++) {
+				arr[i][j] = s.charAt(j) - '0';
+			}
+		}
+		
+		System.out.println(bfs());
+	}
+	
+	private static int bfs() {
+		Queue<Node> q = new LinkedList<>();
+		q.add(new Node(0, 0));
+		visited[0][0] = true;
+		int answer = 0;
+		
+		while(!q.isEmpty()) {
+			int size = q.size();
+			answer++;
+			for (int j = 0; j < size; j++) {
+				Node now = q.poll();
+				if (now.x == N - 1 && now.y == M - 1) {
+					return answer;
+				}
+				for (int i = 0; i < 4; i++) {
+					int nx = now.x + dx[i];
+					int ny = now.y + dy[i];
+					if (nx >= 0 && nx <= N - 1 && ny >= 0 && ny <= M - 1) {
+						if (arr[nx][ny] == 1 && !visited[nx][ny]) {
+							q.add(new Node(nx, ny));
+							visited[nx][ny] = true;
+						}
+					}
+				}
+			}
+		}
+		
+		return answer;
+	}
+	
+	private static class Node {
+		int x, y;
+		
+		public Node(int x, int y) {
+			this.x = x;
+			this.y = y;
+		}
+	}
 }
-
