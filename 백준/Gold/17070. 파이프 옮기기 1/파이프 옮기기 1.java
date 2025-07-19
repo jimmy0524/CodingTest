@@ -17,77 +17,52 @@ public class Main {
 				arr[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-		Node n = new Node(0, 0, 0, 1);
-		dfs(n);
-		System.out.println(answer);
 
+		dfs(0, 1, 0);
+		System.out.println(answer);
 	}
 
-	public static void dfs(Node n) {
-//		System.out.println("startX : " + n.startX);
-//		System.out.println("startY : " + n.startY);
-//		System.out.println("endX : " + n.endX);
-//		System.out.println("endY : " + n.endY);
-		if (n.endX == N - 1 && n.endY == N - 1) {
+	// state = 0 -> 가로 1 -> 세로 2 -> 대각선
+	public static void dfs(int x, int y, int state) {
+		if (x == N - 1 && y == N - 1) {
 			answer++;
 			return;
 		}
-		// --
-		if (n.startX == n.endX && n.endY - n.startY == 1) {
-			if (n.endY <= N - 2) {
-				if (arr[n.startX][n.endY + 1] == 0) {
-					dfs(new Node(n.endX, n.endY, n.endX, n.endY + 1));
-					if (n.endX <= N - 2) {
-						if (arr[n.endX + 1][n.endY + 1] == 0 && arr[n.endX + 1][n.endY] == 0) {
-							dfs(new Node(n.endX, n.endY, n.endX + 1, n.endY + 1));
-						}
+		// 가로
+		if (state == 0) {
+			if (y <= N - 2 && arr[x][y + 1] == 0) {
+				dfs(x, y + 1, 0);
+				if (x <= N - 2) {
+					if (arr[x + 1][y + 1] == 0 && arr[x + 1][y] == 0) {
+						dfs(x + 1, y + 1, 2);
 					}
 				}
 			}
 		}
-		// |
-		else if (n.endX - n.startX == 1 && n.startY == n.endY) {
-			if (n.endX <= N - 2) {
-				if (arr[n.endX + 1][n.endY] == 0) {
-					dfs(new Node(n.endX, n.endY, n.endX + 1, n.endY));
-					if (n.endY <= N - 2) {
-						if (arr[n.endX + 1][n.endY + 1] == 0 && arr[n.endX][n.endY + 1] == 0) {
-							dfs(new Node(n.endX, n.endY, n.endX + 1, n.endY + 1));
-						}
+		// 세로
+		else if (state == 1) {
+			if (x <= N - 2 && arr[x + 1][y] == 0) {
+				dfs(x + 1, y, 1);
+				if (y <= N - 2) {
+					if (arr[x + 1][y + 1] == 0 && arr[x][y + 1] == 0) {
+						dfs(x + 1, y + 1, 2);
 					}
 				}
 			}
 		}
 		// 대각선
 		else {
-			if (n.endY <= N - 2) {
-				if (arr[n.endX][n.endY + 1] == 0) {
-					dfs(new Node(n.endX, n.endY, n.endX, n.endY + 1));
-				}
+			if (y <= N - 2 && arr[x][y + 1] == 0) {
+				dfs(x, y + 1, 0);
 			}
-			if (n.endX <= N - 2) {
-				if (arr[n.endX + 1][n.endY] == 0) {
-					dfs(new Node(n.endX, n.endY, n.endX + 1, n.endY));
-					if (n.endY <= N - 2) {
-						if (arr[n.endX + 1][n.endY + 1] == 0 && arr[n.endX][n.endY + 1] == 0) {
-							dfs(new Node(n.endX, n.endY, n.endX + 1, n.endY + 1));
-						}
+			if (x <= N - 2 && arr[x + 1][y] == 0) {
+				dfs(x + 1, y, 1);
+				if (y <= N - 2) {
+					if (arr[x + 1][y + 1] == 0 && arr[x][y + 1] == 0) {
+						dfs(x + 1, y + 1, 2);
 					}
 				}
 			}
 		}
-
 	}
-
-	public static class Node {
-		int startX, startY, endX, endY = 0;
-
-		public Node(int startX, int startY, int endX, int endY) {
-			this.startX = startX;
-			this.startY = startY;
-			this.endX = endX;
-			this.endY = endY;
-		}
-	}
-
 }
