@@ -58,7 +58,7 @@ public class Main {
             
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < M; j++) {
-                    if (killed[i][j] && copy[i][j] == 1) {
+                    if (killed[i][j]) {
                     	copy[i][j] = 0;
                         killCount++;
                     }
