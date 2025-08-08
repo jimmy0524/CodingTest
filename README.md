@@ -116,6 +116,10 @@
 |2617. 구슬 찾기|[링크](./%EB%B0%B1%EC%A4%80/Gold/2617.%E2%80%85%EA%B5%AC%EC%8A%AC%E2%80%85%EC%B0%BE%EA%B8%B0/%EA%B5%AC%EC%8A%AC%E2%80%85%EC%B0%BE%EA%B8%B0.java)|
 |6987. 월드컵|[링크](./%EB%B0%B1%EC%A4%80/Gold/6987.%E2%80%85%EC%9B%94%EB%93%9C%EC%BB%B5/README.md)|
 |7569. 토마토|[링크](./%EB%B0%B1%EC%A4%80/Gold/7569.%E2%80%85%ED%86%A0%EB%A7%88%ED%86%A0/README.md)|
+### 🚀 Platinum
+| 문제번호 | 링크 |
+| ----- | ----- |
+|2887. 행성 터널|[링크](./%EB%B0%B1%EC%A4%80/Platinum/2887.%E2%80%85%ED%96%89%EC%84%B1%E2%80%85%ED%84%B0%EB%84%90/README.md)|
 ### 🚀 Silver
 | 문제번호 | 링크 |
 | ----- | ----- |
