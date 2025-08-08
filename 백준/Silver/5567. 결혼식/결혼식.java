@@ -27,7 +27,7 @@ public class Main {
 	}
 	
 	public static void bfs(int i) {
-		Queue<Integer> q = new LinkedList<>();
+		Deque<Integer> q = new ArrayDeque<>();
 		q.add(i);
 		visited[i] = true;
 		int depth = 0;
