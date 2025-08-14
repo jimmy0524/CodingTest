@@ -54,6 +54,13 @@
 |이진_트리|[링크](./Do_it_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/%ED%8A%B8%EB%A6%AC9/%EC%9D%B4%EC%A7%84_%ED%8A%B8%EB%A6%AC/sil1_1991.java)|
 |트라이|[링크](./Do_it_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/%ED%8A%B8%EB%A6%AC9/%ED%8A%B8%EB%9D%BC%EC%9D%B4/sil3_14425.java)|
 |트리_알아보기|[링크](./Do_it_%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98_%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/%ED%8A%B8%EB%A6%AC9/%ED%8A%B8%EB%A6%AC_%EC%95%8C%EC%95%84%EB%B3%B4%EA%B8%B0/sil1_1068.java)|
+### 🚀 SWEA
+| 문제번호 | 링크 |
+| ----- | ----- |
+### 🚀 Unrated
+| 문제번호 | 링크 |
+| ----- | ----- |
+|4012. ［모의 SW 역량테스트］ 요리사|[링크](./SWEA/Unrated/4012.%E2%80%85%EF%BC%BB%EB%AA%A8%EC%9D%98%E2%80%85SW%E2%80%85%EC%97%AD%EB%9F%89%ED%85%8C%EC%8A%A4%ED%8A%B8%EF%BC%BD%E2%80%85%EC%9A%94%EB%A6%AC%EC%82%AC/README.md)|
 ## 📚 백준
 ### 🚀 Bronze
 | 문제번호 | 링크 |
