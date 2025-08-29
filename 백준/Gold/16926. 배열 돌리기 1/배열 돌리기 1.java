@@ -20,8 +20,9 @@ public class Main {
                 arr[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-        for (int i = 0; i < R; i++) {
-            rotate(0, 0, N - 1, M - 1);
+        int layers = Math.min(N, M) / 2;
+        for (int i = 0; i < layers; i++) {
+            rotate(i);
         }
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < N; i++) {
@@ -33,33 +34,57 @@ public class Main {
         System.out.println(sb);
     }
 
-    public static void rotate(int sx, int sy, int ex, int ey) {
-        if (sx >= ex || sy >= ey)
-            return;
-        // 모서리들 왼쪽 위부터 반시계 방향
-        int tempA = arr[sx][sy];
-        int tempB = arr[ex][sy];
-        int tempC = arr[ex][ey];
+    public static void rotate(int layer) {
+        int len = (N - 2 * layer) * 2 + (M - 2 * layer) * 2 - 4;
+        int r = R % len;
+        ArrayList<Integer> tempArr = new ArrayList<>();
+        int sx = layer, sy = layer;
+        int ex = N - 1 - layer, ey = M - 1 - layer;
+        // 왼쪽
+        for (int i = sx; i < ex; i++) {
+            tempArr.add(arr[i][sy]);
+        }
 
-        // 윗줄
-        for (int i = sy + 1; i <= ey; i++) {
-            arr[sx][i - 1] = arr[sx][i];
+        // 아래쪽
+        for (int i = sy; i < ey; i++) {
+            tempArr.add(arr[ex][i]);
+        }
+
+        // 오른쪽
+        for (int i = ex; i > sx; i--) {
+            tempArr.add(arr[i][ey]);
+        }
+        // 위쪽
+        for (int i = ey; i > sy; i--) {
+            tempArr.add(arr[sx][i]);
+        }
+
+        for (int i = 0; i < r; i++) {
+            int temp = tempArr.get(tempArr.size() - 1);
+            tempArr.add(0, temp);
+            tempArr.remove(tempArr.size() - 1);
         }
         // 왼쪽
-        for (int i = ex - 1; i >= sx; i--) {
-            arr[i + 1][sy] = arr[i][sy];
+        for (int i = sx; i < ex; i++) {
+            arr[i][sy] = tempArr.get(0);
+            tempArr.remove(0);
         }
-        arr[sx + 1][sy] = tempA;
-        // 아래
-        for (int i = ey - 1; i >= sy; i--) {
-            arr[ex][i + 1] = arr[ex][i];
+
+        // 아래쪽
+        for (int i = sy; i < ey; i++) {
+            arr[ex][i] = tempArr.get(0);
+            tempArr.remove(0);
         }
-        arr[ex][sy + 1] = tempB;
+
         // 오른쪽
-        for (int i = sx + 1; i <= ex; i++) {
-            arr[i - 1][ey] = arr[i][ey];
+        for (int i = ex; i > sx; i--) {
+            arr[i][ey] = tempArr.get(0);
+            tempArr.remove(0);
         }
-        arr[ex - 1][ey] = tempC;
-        rotate(sx + 1, sy + 1, ex - 1, ey - 1);
+        // 위쪽
+        for (int i = ey; i > sy; i--) {
+            arr[sx][i] = tempArr.get(0);
+            tempArr.remove(0);
+        }
     }
 }
