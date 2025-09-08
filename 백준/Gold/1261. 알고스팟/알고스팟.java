@@ -26,11 +26,11 @@ public class Main {
             }
         }
 
-        disk();
+        bfs();
         System.out.println(value[M - 1][N - 1]);
     }
 
-    static void disk() {
+    static void bfs() {
         Deque<int[]> dq = new ArrayDeque<>();
         dq.add(new int[] { 0, 0 });
         value[0][0] = 0;
