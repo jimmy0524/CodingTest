@@ -150,6 +150,7 @@
 |1854. K번째 최단경로 찾기|[링크](./%EB%B0%B1%EC%A4%80/Platinum/1854.%E2%80%85K%EB%B2%88%EC%A7%B8%E2%80%85%EC%B5%9C%EB%8B%A8%EA%B2%BD%EB%A1%9C%E2%80%85%EC%B0%BE%EA%B8%B0/README.md)|
 |2887. 행성 터널|[링크](./%EB%B0%B1%EC%A4%80/Platinum/2887.%E2%80%85%ED%96%89%EC%84%B1%E2%80%85%ED%84%B0%EB%84%90/README.md)|
 |5373. 큐빙|[링크](./%EB%B0%B1%EC%A4%80/Platinum/5373.%E2%80%85%ED%81%90%EB%B9%99/README.md)|
+|5719. 거의 최단 경로|[링크](./%EB%B0%B1%EC%A4%80/Platinum/5719.%E2%80%85%EA%B1%B0%EC%9D%98%E2%80%85%EC%B5%9C%EB%8B%A8%E2%80%85%EA%B2%BD%EB%A1%9C/README.md)|
 ### 🚀 Silver
 | 문제번호 | 링크 |
 | ----- | ----- |
