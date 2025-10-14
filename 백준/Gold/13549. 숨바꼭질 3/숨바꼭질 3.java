@@ -1,54 +1,58 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.StringTokenizer;
 
-class Main {
-    static boolean[] visited;
-    static int max = 100000;
-    static int min = Integer.MAX_VALUE;
-
-    public static void main(String[] args) throws IOException {
+public class Main {
+    static final int MAX = 100000;
+    public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
-        visited = new boolean[max + 1];
-        bfs(N, M);
 
-        System.out.println(min);
-    }
+        int start = Integer.parseInt(st.nextToken());
+        int target = Integer.parseInt(st.nextToken());
 
-    public static void bfs(int n, int m) {
-        Queue<Node> q = new LinkedList<>();
-        q.add(new Node(n, 0));
+        int[] dist = new int[MAX + 1];
+        Arrays.fill(dist, -1);
 
-        while (!q.isEmpty()) {
-            Node now = q.poll();
-            visited[now.x] = true;
+        Deque<Node> dq = new ArrayDeque<>();
+        dq.offerFirst(new Node(start, 0));
+        dist[start] = 0;
 
-            if (now.x == m) {
-                min = Math.min(min, now.time);
+        while (!dq.isEmpty()) {
+            Node now = dq.poll();
+            int cur = now.pos;
+
+            if (cur == target) {
+                System.out.println(dist[cur]);
+                return;
             }
 
-            if (now.x * 2 <= max && !visited[now.x * 2]) {
-                q.add(new Node(now.x * 2, now.time));
+            if (cur * 2 <= MAX && dist[cur * 2] == -1) {
+                dist[cur * 2] = dist[cur];
+                dq.offerFirst(new Node(cur * 2, dist[cur]));
             }
 
-            if (now.x + 1 <= max && !visited[now.x + 1]) {
-                q.add(new Node(now.x + 1, now.time + 1));
+            if (cur - 1 >= 0 && dist[cur - 1] == -1) {
+                dist[cur - 1] = dist[cur] + 1;
+                dq.offerLast(new Node(cur - 1, dist[cur] + 1));
             }
 
-            if (now.x - 1 <= max && now.x - 1 >= 0 && !visited[now.x - 1]) {
-                q.add(new Node(now.x - 1, now.time + 1));
+            if (cur + 1 <= MAX && dist[cur + 1] == -1) {
+                dist[cur + 1] = dist[cur] + 1;
+                dq.offerLast(new Node(cur + 1, dist[cur] + 1));
             }
         }
-
     }
 
     public static class Node {
-        int x, time;
+        int pos;
+        int time;
 
-        public Node(int x, int time) {
-            this.x = x;
+        Node(int pos, int time) {
+            this.pos = pos;
             this.time = time;
         }
     }
