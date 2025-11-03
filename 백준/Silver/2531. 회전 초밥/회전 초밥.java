@@ -1,19 +1,18 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int answer = 0;
         int N = Integer.parseInt(st.nextToken());
         int d = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
         int c = Integer.parseInt(st.nextToken());
-        HashSet<Integer> set = new HashSet<>();
-        int[] arr = new int[N * 2];
+        int answer = 0;
+        int[] sushi = new int[d + 1];
+        int[] arr = new int[N + k];
         for (int i = 0; i < N; i++) {
             int now = Integer.parseInt(br.readLine());
             arr[i] = now;
@@ -27,15 +26,35 @@ public class Main {
 
         int left = 0;
         int right = left + k - 1;
-        while (left < N + k && right < N + k) {
-            for (int i = left; i <= right; i++) {
-                set.add(arr[i]);
+        for (int i = left; i <= right; i++) {
+            sushi[arr[i]]++;
+        }
+        sushi[c]++;
+        int count = 0;
+        for (int i = 1; i < d + 1; i++) {
+            if (sushi[i] != 0) {
+                count++;
             }
-            set.add(c);
-            answer = Math.max(answer, set.size());
-            set.clear();
+        }
+        answer = Math.max(count, answer);
+        while (left < N + k && right < N + k) {
+            if (sushi[arr[left]] != 0) {
+                sushi[arr[left]]--;
+            }
             left += 1;
             right = left + k - 1;
+            if (right >= N + k) {
+                break;
+            }
+            sushi[arr[right]]++;
+
+            count = 0;
+            for (int i = 1; i < d + 1; i++) {
+                if (sushi[i] != 0) {
+                    count++;
+                }
+            }
+            answer = Math.max(count, answer);
         }
 
         System.out.println(answer);
