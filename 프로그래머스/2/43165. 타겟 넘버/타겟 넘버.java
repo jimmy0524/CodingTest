@@ -1,23 +1,20 @@
 class Solution {
-    static int answer = 0;
-    static int[] numbers;
-    static int target;
+    static int count;
+    
     public int solution(int[] numbers, int target) {
-        this.numbers = numbers;
-        this.target = target;
-        dfs(0, 0);
-        return answer;
+        back(0, numbers, 0, target);
+        
+        return count;
     }
     
-    public void dfs(int count, int sum) {
-        if (count == numbers.length) {
-            if (sum == target) {
-                answer++;
+    public void back(int index, int[] numbers, int temp, int target) {
+        if (index == numbers.length) {
+            if (temp == target) {
+                count++;
             }
             return;
         }
-        
-        dfs(count + 1, sum + numbers[count]);
-        dfs(count + 1, sum - numbers[count]);
+        back(index + 1, numbers, temp + numbers[index], target);
+        back(index + 1, numbers, temp - numbers[index], target);
     }
 }
