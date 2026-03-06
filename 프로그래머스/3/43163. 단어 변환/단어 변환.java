@@ -1,39 +1,39 @@
-import java.util.*;
-
 class Solution {
-    String target;
     boolean[] visited;
-    int answer = Integer.MAX_VALUE;
-    String[] words;
+    int answer;
+    boolean check;
+    
     public int solution(String begin, String target, String[] words) {
-        this.target = target;
-        this.words = words;
         visited = new boolean[words.length];
-        if (!Arrays.asList(words).contains(target)) {
+        dfs(begin, target, words, 0);
+        if (!check) {
             return 0;
         }
-        dfs(begin, 0);
         return answer;
     }
     
-    public void dfs(String begin, int count) {
+    public void dfs(String begin, String target, String[] words, int count) {
+        
         if (begin.equals(target)) {
-            answer = Math.min(answer, count);
+            check = true;
+            answer = count;
             return;
         }
         
-        for (int i = 0; i < words.length; i++) { 
-            int unSameCount = 0;
-            for (int j = 0; j < begin.length(); j++) { 
-                if (begin.charAt(j) != words[i].charAt(j)) {
-                        unSameCount++;
+        for (int i = 0; i < words.length; i++) {
+            int unMatch = 0;
+            if (!visited[i]) {
+                for (int j = 0; j < begin.length(); j++) {
+                    if (begin.charAt(j) != words[i].charAt(j)) {
+                        unMatch++;
                     }
-            }
-            
-            if (!visited[i] && unSameCount == 1) {
-                visited[i] = true;
-                dfs(words[i], count + 1);
-                visited[i] = false;
+                }
+                
+                if (unMatch == 1) {
+                        visited[i] = true;
+                        dfs(words[i], target, words, count + 1);
+                        visited[i] = false;
+                    }
             }
         }
     }
