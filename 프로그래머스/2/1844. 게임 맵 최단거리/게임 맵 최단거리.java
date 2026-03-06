@@ -1,46 +1,52 @@
 import java.util.*;
 
 class Solution {
-    static boolean[][] visited;
-    static int[] dx = {1, -1, 0, 0};
-    static int[] dy = {0, 0, 1, -1};
+    int[] dx = {1,-1,0,0};
+    int[] dy = {0, 0, 1, -1};
+    boolean possible = false;
+    int[][] arr;
+    
     public int solution(int[][] maps) {
-        visited = new boolean[maps.length][maps[0].length];
-        return bfs(maps);
+        arr = maps;
+        return bfs();
     }
-    public int bfs(int[][] maps) {
-        Queue<Point> q = new LinkedList<>();
-        q.add(new Point(0, 0, 1));
+    
+    public int bfs() {
+        boolean[][] visited = new boolean[arr.length][arr[0].length];
+        int n = arr.length; //행 개수 x
+        int m = arr[0].length; //열 게수 y
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{0,0});
         visited[0][0] = true;
-        while(!q.isEmpty()) {
-            Point now = q.poll();
-            int x = now.x;
-            int y = now.y;
-            int distance = now.distance;
-            
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-                if (nx >= 0 && nx <= maps.length - 1 && ny >= 0 && ny <= maps[0].length - 1 && !visited[nx][ny] && maps[nx][ny] == 1) {
-                    visited[nx][ny] = true;
-                    q.add(new Point(nx, ny, distance + 1));
-                    if (nx == maps.length - 1 && ny == maps[0].length - 1) {
-                        System.out.println(nx);
-                        System.out.println(ny);
-                        return distance + 1;
+        int count = 0;
+        boolean check = false;
+        
+        here:
+        while (!q.isEmpty()) {
+            int size = q.size();
+            count++;
+            for (int j = 0; j < size; j++) {
+                int now[] = q.poll();
+                if (now[0] == n - 1 && now[1] == m - 1) {
+                    check = true;
+                    break here;
+                }
+
+                for (int i = 0; i < 4; i++) {
+                    int nx = now[0] + dx[i];
+                    int ny = now[1] + dy[i];
+                    if (nx >= 0 && nx < n && ny >= 0 && ny < m && !visited[nx][ny] && arr[nx][ny] == 1) {
+                        q.add(new int[]{nx,ny});
+                        visited[nx][ny] = true;
                     }
                 }
             }
         }
-        return -1;
-    }
-    public static class Point {
-        int x, y, distance;
         
-        public Point(int x, int y, int distance) {
-            this.x = x;
-            this.y = y;
-            this.distance = distance;
-        }
+        if (!check) {
+                return -1;
+            } else {
+                return count;
+            }
     }
 }
