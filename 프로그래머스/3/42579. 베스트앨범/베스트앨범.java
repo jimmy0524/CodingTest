@@ -2,36 +2,45 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String[] genres, int[] plays) {
-        HashMap<String, List<Song>> songs = new HashMap<>();
         HashMap<String, Integer> genreCount = new HashMap<>();
-        
+        HashMap<String, List<Song>> genreSongs = new HashMap<>();
         for (int i = 0; i < genres.length; i++) {
-            songs.putIfAbsent(genres[i], new ArrayList<>());
-            songs.get(genres[i]).add(new Song(i, plays[i]));
             genreCount.put(genres[i], genreCount.getOrDefault(genres[i], 0) + plays[i]);
+            genreSongs.putIfAbsent(genres[i], new ArrayList<>());
+            genreSongs.get(genres[i]).add(new Song(i, plays[i])); 
         }
-        ArrayList<String> genresList = new ArrayList<>(genreCount.keySet());
-        genresList.sort((a,b) -> {return genreCount.get(b) -  genreCount.get(a);});
-        ArrayList<Integer> result = new ArrayList<>();
-        for (String s : genresList) {
-            List<Song> songList = songs.get(s);
-            songList.sort((a, b) -> {return b.count - a.count;});
-            result.add(songList.get(0).index);
-            if (songList.size() > 1) {
-                result.add(songList.get(1).index);
+        
+        ArrayList<String> genreList = new ArrayList<>(genreCount.keySet());
+        //재생수로 정렬된 장르 리스트
+        genreList.sort((a, b) -> genreCount.get(b) - genreCount.get(a));
+        
+        ArrayList<Integer> answer = new ArrayList<>();
+        
+        for (String genre : genreList) {
+            ArrayList<Song> songs = new ArrayList<>(genreSongs.get(genre));
+            songs.sort((a, b) -> b.count - a.count);
+            int count = 0;
+            for (Song song : songs) {
+                if (count == 2) break;
+                answer.add(song.index);
+                count++;
             }
         }
         
-        return result.stream().mapToInt(i -> i).toArray();
+        int[] answerArray = new int[answer.size()];
+        for (int i = 0; i < answer.size(); i++) {
+            answerArray[i] = answer.get(i);
+        }
+        
+        return answerArray;
     }
     
-    public class Song {
-    int index;
-    int count;
-    
-    Song(int i, int c) {
-        index = i;
-        count = c;
+    private class Song {
+        int index, count;
+        
+        public Song (int index, int count) {
+            this.index = index;
+            this.count = count;
+        }
     }
-}
 }
