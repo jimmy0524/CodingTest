@@ -42,15 +42,14 @@ public class Main {
 
     public static void dijk(int K) {
         answer[K] = 0;
-        visited[K] = true;
         pq.add(new Node(K,0));
 
         while (!pq.isEmpty()) {
             Node node = pq.poll();
+            if (visited[node.to]) continue;
             visited[node.to] = true;
             for (Node next : arr[node.to]) {
                 int nextTo = next.to;
-                if (visited[nextTo]) continue;
                 if (answer[nextTo] > answer[node.to] + next.value) {
                     answer[nextTo] = answer[node.to] + next.value;
                     pq.add(new Node(nextTo,answer[nextTo]));
