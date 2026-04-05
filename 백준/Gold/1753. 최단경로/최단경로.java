@@ -1,64 +1,59 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 public class Main {
     static ArrayList<Node>[] arr;
-    static int[] dist;
+    static PriorityQueue<Node> pq = new PriorityQueue<>((a,b) -> a.value - b.value);
     static boolean[] visited;
-    static PriorityQueue<Node> pq;
-
-    public static void main(String[] args) throws Exception {
+    static int[] answer;
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int V = Integer.parseInt(st.nextToken());
         int E = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(br.readLine());
-
         arr = new ArrayList[V + 1];
-        dist = new int[V + 1];
         visited = new boolean[V + 1];
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        pq = new PriorityQueue<>((a, b) -> a.value - b.value);
-
+        answer = new int[V + 1];
         for (int i = 1; i <= V; i++) {
             arr[i] = new ArrayList<>();
+            answer[i] = Integer.MAX_VALUE;
         }
-
-        for (int i = 0; i < E; i++) {
+        for (int i = 1; i <= E; i++) {
             st = new StringTokenizer(br.readLine());
-            int from = Integer.parseInt(st.nextToken());
-            int to = Integer.parseInt(st.nextToken());
-            int dist = Integer.parseInt(st.nextToken());
-            arr[from].add(new Node(to, dist));
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+            arr[a].add(new Node(b,v));
         }
-        disk(K);
-        StringBuilder sb = new StringBuilder();
+        dijk(K);
         for (int i = 1; i <= V; i++) {
-            if (dist[i] == Integer.MAX_VALUE) {
-                sb.append("INF");
+            if (answer[i] == Integer.MAX_VALUE) {
+                System.out.println("INF");
             } else {
-                sb.append(dist[i]);
+                System.out.println(answer[i]);
             }
-            sb.append("\n");
         }
-        System.out.println(sb);
     }
 
-    public static void disk(int start) {
-        dist[start] = 0;
-        pq.add(new Node(start, 0));
+    public static void dijk(int K) {
+        answer[K] = 0;
+        visited[K] = true;
+        pq.add(new Node(K,0));
 
         while (!pq.isEmpty()) {
-            Node now = pq.poll();
-            int to = now.to;
-            if (visited[to])
-                continue;
-            visited[to] = true;
-
-            for (Node next : arr[to]) {
-                if (dist[next.to] > dist[to] + next.value) {
-                    dist[next.to] = dist[to] + next.value;
-                    pq.add(new Node(next.to, dist[next.to]));
+            Node node = pq.poll();
+            visited[node.to] = true;
+            for (Node next : arr[node.to]) {
+                int nextTo = next.to;
+                if (visited[nextTo]) continue;
+                if (answer[nextTo] > answer[node.to] + next.value) {
+                    answer[nextTo] = answer[node.to] + next.value;
+                    pq.add(new Node(nextTo,answer[nextTo]));
                 }
             }
         }
@@ -67,7 +62,7 @@ public class Main {
     public static class Node {
         int to, value;
 
-        Node(int to, int value) {
+        public Node(int to, int value) {
             this.to = to;
             this.value = value;
         }
