@@ -2,19 +2,23 @@ import java.util.*;
 
 class Solution {
     boolean solution(String s) {
-        int count = 0;
-        
+       Stack<Character> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') {
-                count++;
+            char c = s.charAt(i);
+            if (c == '(') {
+                stack.push('(');
             } else {
-                count--;
-            }
-            if (count < 0) {
-                return false;
+                if(stack.isEmpty()) {
+                    return false;
+                } else {
+                    stack.pop();
+                }
             }
         }
-        
-       return count == 0;
+        if (stack.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
